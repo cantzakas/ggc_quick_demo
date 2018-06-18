@@ -49,7 +49,28 @@ FROM (
 ```
 - Test JDBC connectivity. You would need either the Pivotal Greenplum® Database JDBC Driver which is available for download along with Pivotal Greenplum® from [Pivotal Network website](https://network.pivotal.io/products/pivotal-gpdb) or the PostgreSQL Database JDBC driver, which is available to download from [postgresql.org website](https://jdbc.postgresql.org/download.html). Then follow the procedure outlined in the Pivotal Greenplum Knowledge Base article [How to test JDBC and Greenplum Datadirect JDBC](https://discuss.pivotal.io/hc/en-us/articles/202912073-How-to-test-JDBC-and-Greenplum-Datadirect-JDBC).
 - Download and install Pivotal GemFire® from [Pivotal Network website](https://network.pivotal.io/products/pivotal-gemfire) and then follow the instructions on [Installing Pivotal GemFire](http://gemfire.docs.pivotal.io/93/gemfire/getting_started/installation/install_intro.html). Also from the same [repo](https://network.pivotal.io/products/pivotal-gemfire), download the Pivotal Gemfire®-Greenplum® Connector .jar file.
-- Setup Environment parameters
+- [Setup Environment parameters](https://github.com/cantzakas/ggc_quick_demo/blob/master/scripts/set_env.sh). There is a number of parameters that need to be setup before you start Pivotal GemFire® and Pivotal Gemfire®-Greenplum® Connector, similar to those shown below:
+```shell
+# Customize environment variables et al
+export CLASSPATH=$CLASSPATH:/Users/cantzakas/Documents/github/pivotal-gemfire-9.3.0/gemfire-greenplum-3.1.1.jar:/Users/cantzakas/Documents/github/postgresql-42.2.2.jar
+#export JAVA_HOME=$JAVA_HOME:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
+export GEMFIRE=/Users/cantzakas/Documents/github/pivotal-gemfire-9.3.0
+export GF_JAVA=$JAVA_HOME/bin/java
+export PATH=$PATH:$JAVA_HOME/bin:GEMFIRE/bin
+
+# Customize this settings for custom Gemfire/Geode
+## check if locator port has been set otherwise set to default
+export GEODE_LOCATOR_PORT="${GEODE_LOCATOR_PORT:-10334}"
+export GEODE_IP=localhost
+export GEODE_SERVERIP=$GEODE_IP
+
+# Customize this settings for custom Greenplum
+export GREENPLUM_HOST=gpdb-sandbox
+export GREENPLUM_USER=gpadmin
+export GREENPLUM_DB=gpadmin
+export GREENPLUM_DB_PWD=pivotal
+export PGPASSWORD=${GREENPLUM_DB_PWD}
+```
 - Setup **CLASSPATH**
 - Edit Pivotal GemFire® `cache.xml`
 - Start Pivotal GemFire® locator, server and verify if the connector is available
