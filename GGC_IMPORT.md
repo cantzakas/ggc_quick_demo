@@ -5,7 +5,7 @@ First, using either psql or your favorite SQL client, let's run some SQL queries
 $ psql -c "SELECT COUNT(*) FROM basic;"
  count 
 -------
- 20000
+ 10000
 (1 row)
 
 ```
