@@ -48,7 +48,7 @@ FROM (
 	SELECT GENERATE_SERIES(0, 9999) AS id) A;
 ```
 - Define your Pivotal Greenplum® Parallel File Server (gpfdist) endpoint. The gpfdist protocol is used in a CREATE EXTERNAL TABLE SQL command to access external data served by the Greenplum Database gpfdist file server utility. When external data is served by gpfdist, all segments in the Pivotal Greenplum® Database system can read or write external table data in parallel. When you start a gpfdist instance you specify a listen port and the path to a directory containing files to read or where files are to be written. For example, this command runs gpfdist in the background, listening on port 8000, and serving files in the `./ggc_demo` directory log output messages and errors to a log file on the same directory:
-```
+```shell
 $ gpfdist -d ./ggc_demo -p 8000 -l ./ggc_demo/log &
 ```
 - Test JDBC connectivity. You would need either the Pivotal Greenplum® Database JDBC Driver which is available for download along with Pivotal Greenplum® from [Pivotal Network website](https://network.pivotal.io/products/pivotal-gpdb) or the PostgreSQL Database JDBC driver, which is available to download from [postgresql.org website](https://jdbc.postgresql.org/download.html). Then follow the procedure outlined in the Pivotal Greenplum Knowledge Base article [How to test JDBC and Greenplum Datadirect JDBC](https://discuss.pivotal.io/hc/en-us/articles/202912073-How-to-test-JDBC-and-Greenplum-Datadirect-JDBC).
@@ -78,14 +78,14 @@ export GEODE_SERVERIP=$GEODE_IP
 - Cross-check whether `CLASSPATH`, `GEMFIRE`, `GF_JAVA` and `PATH` have been properly set, especially the Pivotal Gemfire®-Greenplum® Connector jar (i.e. `gemfire-greenplum-3.1.1.jar`) and Pivotal Greenplum® Database JDBC Driver (or the PostgreSQL Database JDBC driver) (i.e. `postgresql-42.2.2.jar`) __should be__ properly defined in _**CLASSPATH**_
 - [Edit Pivotal GemFire® `cache.xml`](https://github.com/cantzakas/ggc_quick_demo/blob/master/scripts/gcc_cache.xml). There are five (5) distinct parts one needs to edit within Pivotal Gemfire® `cache.xml` file:
   1. `xsi:schemaLocation`: make sure `http://schema.pivotal.io/gemfire/gpdb/gpdb-2.4.xsd" version="1.0"` is properly referenced,as shown below
-  ```
+  ```xml
   <cache xmlns="http://geode.apache.org/schema/cache"
     xmlns:gpdb="http://schema.pivotal.io/gemfire/gpdb"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://geode.apache.org/schema/cache  http://geode.apache.org/schema/cache/cache-1.0.xsd http://schema.pivotal.io/gemfire/gpdb  http://schema.pivotal.io/gemfire/gpdb/gpdb-2.4.xsd" version="1.0">
   ```
   2. `<pdx-serializer>` should be set as shown below:
-  ```
+  ```xml
   <pdx read-serialized="true" persistent="false">
   	<pdx-serializer>
 		<class-name>org.apache.geode.pdx.ReflectionBasedAutoSerializer</class-name>
@@ -96,14 +96,14 @@ export GEODE_SERVERIP=$GEODE_IP
   </pdx>
   ```
   3. `<jndi-bindings>` should be set as shown below. Make sure `jdbc-driver-class`, `user-name`, `password` and `connection-url` parameters are set properly to match your Pivotal Greenplum® connection details.
-  ```
+  ```xml
   <jndi-bindings>
   	<jndi-binding jndi-name="DemoDatasource" type="SimpleDataSource" jdbc-driver-class="org.postgresql.Driver" user-name="gpadmin" password="pivotal" connection-url="jdbc:postgresql://gpdb-sandbox:5432/gpadmin">
   	</jndi-binding>
   </jndi-bindings>
   ```
   4. `<region>` information, should map to your Pivotal Greenplum® test table. For detailed information on how the types correspond between a Pivotal GemFire® region and a Pivotal Greenplum® (GPDB) table are described in a cache.xml file, please check [Datatype Mapping](https://ggc.docs.pivotal.io/latest/mapping.html). In our case, for the test table we defined before, it should be set as shown below:
-  ```
+  ```xml
   <region name="basic1">
     <region-attributes refid="PARTITION">
       <partition-attributes redundant-copies="1"/>
@@ -124,8 +124,45 @@ export GEODE_SERVERIP=$GEODE_IP
   </region>
   ```
   5. `<gpdb:gpfdist>` information, should point to Pivotal Greenplum® Parallel File Server (gpfdist) you defined before:
-  ```
+  ```shell
   <gpdb:gpfdist port="8000"/>
+  ```
+  Putting everything together, your `cache.xml` file should like:
+  ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <cache xmlns="http://geode.apache.org/schema/cache" xmlns:gpdb="http://schema.pivotal.io/gemfire/gpdb" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://geode.apache.org/schema/cache  http://geode.apache.org/schema/cache/cache-1.0.xsd  http://schema.pivotal.io/gemfire/gpdb  http://schema.pivotal.io/gemfire/gpdb/gpdb-2.4.xsd" version="1.0">
+  <pdx read-serialized="true" persistent="false">
+    <pdx-serializer>
+      <class-name>org.apache.geode.pdx.ReflectionBasedAutoSerializer</class-name>
+      <parameter name="classes">
+        <string>io.pivotal.gemfire.demo.entity.*</string>
+      </parameter>
+    </pdx-serializer>
+   </pdx>
+   <jndi-bindings>
+     <jndi-binding jndi-name="DemoDatasource" type="SimpleDataSource" jdbc-driver-class="org.postgresql.Driver" user-name="gpadmin" password="pivotal" connection-url="jdbc:postgresql://gpdb-sandbox:5432/gpadmin">
+     </jndi-binding>
+    </jndi-bindings>
+    <region name="basic1">
+      <region-attributes refid="PARTITION">
+        <partition-attributes redundant-copies="1"/>
+      </region-attributes>
+      <gpdb:store datasource="DemoDatasource">
+        <gpdb:types>
+          <gpdb:pdx name="io.pivotal.gemfire.demo.entity.Parent" schema="public" table="basic">
+            <gpdb:id field="id"/>
+            <gpdb:fields>
+              <gpdb:field name="id" class="java.lang.Long"/>
+              <gpdb:field name="col1" class="java.lang.String"/>
+              <gpdb:field name="col2" class="java.lang.Integer"/>
+              <gpdb:field name="col3" class="java.lang.Float"/>
+            </gpdb:fields>
+          </gpdb:pdx>
+        </gpdb:types>
+      </gpdb:store>
+    </region>
+    <gpdb:gpfdist port="8000"/>
+  </cache>
   ```
 - Start Pivotal GemFire® locator, server and verify if the connector is available
 
