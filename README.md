@@ -227,4 +227,6 @@ IS AVAILABLE
    Greenplum rows inserted  : 5
    Duration                 : 0.25s
    ```
- 
+## Labs
+- [Importing our sample data from Pivotal Greenplum® test table to Pivotal GemFire®](https://github.com/cantzakas/ggc_quick_demo/blob/master/GGC_IMPORT.md)
+- [Exporting data from Pivotal GemFire® to the Pivotal Greenplum® test table](https://github.com/cantzakas/ggc_quick_demo/blob/master/GGC_EXPORT.md)
