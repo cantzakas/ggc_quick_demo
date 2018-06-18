@@ -52,9 +52,9 @@ FROM (
 - [Setup Environment parameters](https://github.com/cantzakas/ggc_quick_demo/blob/master/scripts/set_env.sh). There is a number of parameters that need to be setup before you start Pivotal GemFire® and Pivotal Gemfire®-Greenplum® Connector, similar to those shown below:
 ```shell
 # Customize environment variables et al
-export CLASSPATH=$CLASSPATH:/Users/cantzakas/Documents/github/pivotal-gemfire-9.3.0/gemfire-greenplum-3.1.1.jar:/Users/cantzakas/Documents/github/postgresql-42.2.2.jar
+export CLASSPATH=$CLASSPATH:~/github/pivotal-gemfire-9.3.0/gemfire-greenplum-3.1.1.jar:~/github/postgresql-42.2.2.jar
 #export JAVA_HOME=$JAVA_HOME:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
-export GEMFIRE=/Users/cantzakas/Documents/github/pivotal-gemfire-9.3.0
+export GEMFIRE=~/github/pivotal-gemfire-9.3.0
 export GF_JAVA=$JAVA_HOME/bin/java
 export PATH=$PATH:$JAVA_HOME/bin:GEMFIRE/bin
 
@@ -68,10 +68,10 @@ export GEODE_SERVERIP=$GEODE_IP
 export GREENPLUM_HOST=gpdb-sandbox
 export GREENPLUM_USER=gpadmin
 export GREENPLUM_DB=gpadmin
-export GREENPLUM_DB_PWD=pivotal
+export GREENPLUM_DB_PWD=changeme
 export PGPASSWORD=${GREENPLUM_DB_PWD}
 ```
-- Setup **CLASSPATH**
+- Cross-check whether `CLASSPATH`, `GEMFIRE`, `GF_JAVA` and `PATH` have been properly set, especially the Pivotal Gemfire®-Greenplum® Connector jar (i.e. `gemfire-greenplum-3.1.1.jar`) and Pivotal Greenplum® Database JDBC Driver (or the PostgreSQL Database JDBC driver) (i.e. `postgresql-42.2.2.jar`) __should be__ properly defined in _**CLASSPATH**_
 - Edit Pivotal GemFire® `cache.xml`
 - Start Pivotal GemFire® locator, server and verify if the connector is available
 
