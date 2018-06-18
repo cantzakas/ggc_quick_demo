@@ -1,10 +1,10 @@
 # Pivotal Gemfire-Greenplum Connector Demo
 Quick demo on Pivotal Gemfire-Greenplum Connector setup, configuration & use
+![Pivotal Gemfire®](https://github.com/cantzakas/ggc_quick_demo/blob/master/img/Pivotal-Gemfire-Logo-FullColor.png)
+![Pivotal Greenplum®](https://github.com/cantzakas/ggc_quick_demo/blob/master/img/Pivotal-Greenplum-Logo-FullColor.png)
 
 ## Overview
 The Pivotal GemFire®-Greenplum® Connector facilitates the two way mirroring of the entries of an entire Pivotal GemFire® region into a Pivotal Greenplum Database® (GPDB) table and vice-versa.
-![Pivotal Gemfire®](https://github.com/cantzakas/ggc_quick_demo/blob/master/img/Pivotal-Gemfire-Logo-FullColor.png)
-![Pivotal Greenplum®](https://github.com/cantzakas/ggc_quick_demo/blob/master/img/Pivotal-Greenplum-Logo-FullColor.png)
 
 ## How it works
 - All transfers are initiated from and specified within Pivotal GemFire®.
