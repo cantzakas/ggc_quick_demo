@@ -187,4 +187,44 @@ IS AVAILABLE
 
 ## Using Pivotal Gemfire®-Greenplum® Connector 
 - Importing Data from Pivotal Greenplum® to Pivotal GemFire®
-- Exporting Data from Pivotal GemFire® to Pivotal Greenplum®
+  - Availability: **Online**. You must be connected in gfsh to a JMX Manager member to use this command.
+  - Syntax:
+  ```shell
+  import gpdb --region=regionpath
+  ```
+  | Name | Description |
+  | :--- | :---        |
+  | ‑‑region | Required. Region into which data will be imported. Prefix the region name with a slash character. |
+  - Example Commands:
+  ```shell
+  import gpdb --region=/customers
+  GemFire entries imported : 10
+  Duration                 : 0.18s
+  
+ - Exporting Data from Pivotal GemFire® to Pivotal Greenplum®. Export a region to GPDB. Export is supported from partitioned GemFire regions only. Data cannot be exported from replicated regions.
+  - Availability: **Online**. You must be connected in gfsh to a JMX Manager member to use this command.
+  - Syntax:
+  ```shell
+  export gpdb --region=regionpath --type=value [--remove-all-entries(=value)]
+  ```
+  | Name | Description | Default Value |
+  | :--- | :---        | :---          |
+  | ‑‑region | Required. Region from which data is to be exported. Prefix the region name with a slash character. | |
+  | ‑‑type | Required. Specification of the functionality implemented for the export operation. A value of UPSERT updates rows already present in the GPDB table, and it inserts rows where not already present. A value of INSERT_ALL does a GPDB insert operation for each entry in the GemFire region. A value of INSERT_MISSING does a GPDB insert operation for each GemFire region entry for which there is no corresponding GPDB row; no updates are done for existing GPDB rows. A value of UPDATE updates rows already present in the GPDB table. | |
+  | ‑‑remove-all-entries | Optional boolean value that, when true, removes all GemFire entries present in the specified region when the export operation is initiated, once changes have been successfully committed to the GPDB table. All exported region entries are removed, independent of which rows are updated or inserted into the GPDB table. | false |
+  - Example Commands:
+  ```shell
+  gfsh>export gpdb --region=/customers --type=UPSERT
+  GemFire entries exported : 5
+  Greenplum rows updated   : 5
+  Greenplum rows inserted  : 0
+  Duration                 : 0.30s
+  ```
+  ```shell
+  gfsh>export gpdb --region=/customers --type=INSERT_ALL --remove-all-entries=true
+  GemFire entries exported : 5
+  GemFire entries removed  : 5
+  Greenplum rows inserted  : 5
+  Duration                 : 0.25s
+  ```
+  
