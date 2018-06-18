@@ -1,6 +1,10 @@
 # Prepare Pivotal Greenplum® test table and load data
-Assuming you have already succesfully installed and configured user connection to a Pivotal Greenplum® database cluster, now it's time to create a test table and load it with sample data.
+Assuming you have already succesfully installed and configured a Pivotal Greenplum® database cluster, now it's time to create a test table and load it with sample data, using either [psql](https://gpdb.docs.pivotal.io/latest/utility_guide/client_utilities/psql.html) comamand-line interface or your favorite SQL client, i.e. [gpAdmin](https://www.pgadmin.org/) or any similar.
 
+- Connect to your Pivotal Greenplum® database cluster
+```bash
+psql -h <host> -p <port_number> -U <user_name> <database_name>
+```
 - [Create a test table](https://github.com/cantzakas/ggc_quick_demo/blob/master/scripts/sql_create_gpdb_table.sql)
 ```sql
 DROP TABLE IF EXISTS basic;
