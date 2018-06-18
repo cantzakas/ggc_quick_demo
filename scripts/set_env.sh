@@ -12,8 +12,8 @@ export GEODE_IP=localhost
 export GEODE_SERVERIP=$GEODE_IP
 
 # Customize this settings for custom Greenplum
-export GREENPLUM_HOST=gpdb-sandbox
-export GREENPLUM_USER=gpadmin
-export GREENPLUM_DB=gpadmin
-export GREENPLUM_DB_PWD=changeme
-export PGPASSWORD=${GREENPLUM_DB_PWD}
+#export GREENPLUM_HOST=gpdb-sandbox
+#export GREENPLUM_USER=gpadmin
+#export GREENPLUM_DB=gpadmin
+#export GREENPLUM_DB_PWD=changeme
+#export PGPASSWORD=${GREENPLUM_DB_PWD}
