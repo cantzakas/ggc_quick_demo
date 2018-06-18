@@ -18,7 +18,7 @@ The Pivotal GemFire®-Greenplum® Connector facilitates the two way mirroring of
 - **Pivotal Greenplum** (required): download Pivotal Greenplum from [Pivotal Network website](https://network.pivotal.io/products/pivotal-gpdb) (requires a subscription licence from [Pivotal](http://pivotal.io) or if Licensee is licensing Software as Evaluation Software and/or as Beta Components, then such use is solely for use in a non-production environment for the Evaluation Period).
 - **Pivotal Gemfire** (required): download Pivotal Gemfire from [Pivotal Network website](https://network.pivotal.io/products/pivotal-gemfire) (requires a subscription licence from [Pivotal](http://pivotal.io) or if Licensee is licensing Software as Evaluation Software and/or as Beta Components, then such use is solely for use in a non-production environment for the Evaluation Period).
 - **Pivotal Gemfire-Greenplum Connector** (required): available for download along with Pivotal Gemfire from [Pivotal Network website](https://network.pivotal.io/products/pivotal-gemfire).
-- **Greenplum Database JDBC Driver** (required \*): available for download along with Pivotal Greenplum from [Pivotal Network website](https://network.pivotal.io/products/pivotal-gpdb).
-- **PostgreSQL Database JDBC driver** (required \*): available to download from [postgresql.org website](https://jdbc.postgresql.org/download.html).
+- **Greenplum Database JDBC Driver** (required, see [Note](README.md#Note)): available for download along with Pivotal Greenplum from [Pivotal Network website](https://network.pivotal.io/products/pivotal-gpdb).
+- **PostgreSQL Database JDBC driver** (required, see [Note](README.md#Note)): available to download from [postgresql.org website](https://jdbc.postgresql.org/download.html).
 
-_**\*Note:**_ one can use either Greenplum Database JDBC Driver or PostgreSQL Database JDBC driver.
+#### Note: one can use either Greenplum Database JDBC Driver or PostgreSQL Database JDBC driver.
