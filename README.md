@@ -25,8 +25,8 @@ The Pivotal GemFire®-Greenplum® Connector facilitates the two way mirroring of
 One may use either Pivotal Greenplum® Database JDBC Driver or PostgreSQL Database JDBC driver.
 
 ## Setup & Configuration
-- Download Pivotal Greenplum® from [Pivotal Network website](https://network.pivotal.io/products/pivotal-gpdb) and then follow the instructions on [Pivotal Greenplum® Database Installation Guide](http://gpdb.docs.pivotal.io/580/install_guide/install_guide.html) for installing and configuring Greenplum Database software and configuring Greenplum Database host machines.
-- Connect to your Pivotal Greenplum® database cluster using either [psql](https://gpdb.docs.pivotal.io/latest/utility_guide/client_utilities/psql.html) comamand-line interface or your favorite SQL client, i.e. [gpAdmin](https://www.pgadmin.org/) or any similar
+- Download Pivotal Greenplum® from [Pivotal Network website](https://network.pivotal.io/products/pivotal-gpdb) and then follow the instructions on [Pivotal Greenplum® Database Installation Guide](http://gpdb.docs.pivotal.io/580/install_guide/install_guide.html) for installing and configuring Pivotal Greenplum® Database software and host machines.
+- Connect to your Pivotal Greenplum® database cluster using either [psql](https://gpdb.docs.pivotal.io/latest/utility_guide/client_utilities/psql.html) command-line interface or your favorite SQL client, i.e. [gpAdmin](https://www.pgadmin.org/) or any similar
 ```shell
 psql -h <host> -p <port_number> -U <user_name> <database_name>
 ```
@@ -48,8 +48,7 @@ FROM (
 	SELECT GENERATE_SERIES(0, 9999) AS id) A;
 ```
 - Test JDBC connectivity. You would need either the Pivotal Greenplum® Database JDBC Driver which is available for download along with Pivotal Greenplum® from [Pivotal Network website](https://network.pivotal.io/products/pivotal-gpdb) or the PostgreSQL Database JDBC driver, which is available to download from [postgresql.org website](https://jdbc.postgresql.org/download.html). Then follow the procedure outlined in the Pivotal Greenplum Knowledge Base article [How to test JDBC and Greenplum Datadirect JDBC](https://discuss.pivotal.io/hc/en-us/articles/202912073-How-to-test-JDBC-and-Greenplum-Datadirect-JDBC).
-- Install Pivotal GemFire®
-- Pivotal GemFire®-Greenplum® connector
+- Download and install Pivotal GemFire® from [Pivotal Network website](https://network.pivotal.io/products/pivotal-gemfire) and then follow the instructions on [Installing Pivotal GemFire](http://gemfire.docs.pivotal.io/93/gemfire/getting_started/installation/install_intro.html). Also from the same [repo](https://network.pivotal.io/products/pivotal-gemfire), download the Pivotal Gemfire®-Greenplum® Connector .jar file.
 - Setup Environment parameters
 - Setup **CLASSPATH**
 - Edit Pivotal GemFire® `cache.xml`
