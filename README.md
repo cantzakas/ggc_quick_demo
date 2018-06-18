@@ -21,4 +21,5 @@ The Pivotal GemFire®-Greenplum® Connector facilitates the two way mirroring of
 - **Greenplum Database JDBC Driver** (required, see [Note](README.md#Note)): available for download along with Pivotal Greenplum from [Pivotal Network website](https://network.pivotal.io/products/pivotal-gpdb).
 - **PostgreSQL Database JDBC driver** (required, see [Note](README.md#Note)): available to download from [postgresql.org website](https://jdbc.postgresql.org/download.html).
 
-#### Note: one can use either Greenplum Database JDBC Driver or PostgreSQL Database JDBC driver.
+#### Note: 
+One may use either Greenplum Database JDBC Driver or PostgreSQL Database JDBC driver.
