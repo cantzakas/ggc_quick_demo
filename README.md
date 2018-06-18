@@ -164,7 +164,26 @@ export GEODE_SERVERIP=$GEODE_IP
     <gpdb:gpfdist port="8000"/>
   </cache>
   ```
-- Start Pivotal GemFire® locator, server and verify if the connector is available
+- Start Pivotal GemFire® locator and server; make sure Pivotal GemFire® locator and server components are started with the --include-system-classpath option such that they use the environment variable, and can use the connector:
+```shell
+start locator --name=loc1 --include-system-classpath
+start server --name=srv1 --cache-xml-file=~/github/pivotal-gemfire-9.3.0/config/cache.xml --include-system-classpath
+```
+-  To verify that the connector is available and properly configured, start `gfsh` and connect to the cluster:
+```shell
+gfsh>connect
+```
+  The output from the help import gpdb command, once connected, will identify if the connector is available. Output containing
+```shell
+IS AVAILABLE
+    true
+```
+  means that the connector is available. Output containing
+```shell
+IS AVAILABLE
+    false
+```
+  means that the connector is not available. If not available, either the ```gfsh help``` command was issued while not connected to the cluster, the classpath is incorrect, or a server was started without the ```--include-system-classpath``` option.
 
 ## Using Pivotal Gemfire®-Greenplum® Connector 
 - Importing Data from Pivotal Greenplum® to Pivotal GemFire®
