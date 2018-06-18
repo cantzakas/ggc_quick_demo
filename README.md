@@ -65,14 +65,14 @@ export GEODE_IP=localhost
 export GEODE_SERVERIP=$GEODE_IP
 
 # Customize this settings for custom Greenplum
-export GREENPLUM_HOST=gpdb-sandbox
-export GREENPLUM_USER=gpadmin
-export GREENPLUM_DB=gpadmin
-export GREENPLUM_DB_PWD=changeme
-export PGPASSWORD=${GREENPLUM_DB_PWD}
+#export GREENPLUM_HOST=gpdb-sandbox
+#export GREENPLUM_USER=gpadmin
+#export GREENPLUM_DB=gpadmin
+#export GREENPLUM_DB_PWD=changeme
+#export PGPASSWORD=${GREENPLUM_DB_PWD}
 ```
 - Cross-check whether `CLASSPATH`, `GEMFIRE`, `GF_JAVA` and `PATH` have been properly set, especially the Pivotal Gemfire®-Greenplum® Connector jar (i.e. `gemfire-greenplum-3.1.1.jar`) and Pivotal Greenplum® Database JDBC Driver (or the PostgreSQL Database JDBC driver) (i.e. `postgresql-42.2.2.jar`) __should be__ properly defined in _**CLASSPATH**_
-- Edit Pivotal GemFire® `cache.xml`
+- [Edit Pivotal GemFire® `cache.xml`](https://github.com/cantzakas/ggc_quick_demo/blob/master/scripts/gcc_cache.xml)
 - Start Pivotal GemFire® locator, server and verify if the connector is available
 
 ## Using Pivotal Gemfire®-Greenplum® Connector 
