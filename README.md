@@ -26,9 +26,9 @@ One may use either Pivotal Greenplum® Database JDBC Driver or PostgreSQL Databa
 
 ## Setup & Configuration
 - Pivotal Greenplum®
-  - Install Pivotal Greenplum®
-  - Prepare test table and load sample data
-  - Test JDBC connectivity
+  - Download Pivotal Greenplum® from [Pivotal Network website](https://network.pivotal.io/products/pivotal-gpdb) and then follow the instructions on [Pivotal Greenplum® Database Installation Guide](http://gpdb.docs.pivotal.io/580/install_guide/install_guide.html) for installing and configuring Greenplum Database software and configuring Greenplum Database host machines.
+  - [Prepare test table and load sample data]()
+  - [Test JDBC connectivity]
 - Pivotal GemFire® & the Pivotal GemFire®-Greenplum® connector
   - Install Pivotal GemFire®
   - Setup Environment parameters
