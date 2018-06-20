@@ -63,3 +63,5 @@ Result
 15000
 ```
 
+### Next lab
+[Exporting data from Pivotal GemFire® to the Pivotal Greenplum® test table](https://github.com/cantzakas/ggc_quick_demo/blob/master/GGC_EXPORT.md)
